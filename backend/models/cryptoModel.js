@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const CryptoSchema = mongoose.Schema(
     {
+
         name: {
             type: String,
             required: true,

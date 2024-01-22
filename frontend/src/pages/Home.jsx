@@ -47,7 +47,7 @@ const Home = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {cryptos.map((crypto) => {
+                        {cryptos.map((crypto) => (
                             <tr key={crypto.id} className='h-8'>
                                 <td className='border border-slate-700 rounded-md text-center'>
                                     {crypto.name}
@@ -59,20 +59,20 @@ const Home = () => {
                                     {crypto.price}
                                 </td>
                                 <td className='border border-slate-700 rounded-md text-center'>
-                                    <div>
-                                        <Link to={`/cryptos/details/${crypto.id}`}>
+                                    <div className='flex justify-center gap-x-4'>
+                                        <Link to={`/cryptos/details/${crypto._id}`}>
                                             <BsInfoCircle className='text-2x1 text-green-800'></BsInfoCircle>
                                         </Link>
-                                        <Link to={`/cryptos/edit/${crypto.id}`}>
-                                            <AiOutlineEdit className='text-2x1 text-green-800'></AiOutlineEdit>
+                                        <Link to={`/cryptos/edit/${crypto._id}`}>
+                                            <AiOutlineEdit className='text-2x1 text-yellow-600'></AiOutlineEdit>
                                         </Link>
-                                        <Link to={`/cryptos/delete/${crypto.id}`}>
-                                            <MdOutlineDelete className='text-2x1 text-green-800'></MdOutlineDelete>
+                                        <Link to={`/cryptos/delete/${crypto._id}`}>
+                                            <MdOutlineDelete className='text-2x1 text-red-600'></MdOutlineDelete>
                                         </Link>
                                     </div>
                                 </td>
                             </tr>
-                        })}
+                        ))}
                     </tbody>
                 </table>
             )}
