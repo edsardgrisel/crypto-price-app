@@ -16,6 +16,7 @@ const CryptoSchema = mongoose.Schema(
             type: Number,
             required: false,
             unique: false,
+            default: -1,
         }
 
     },
