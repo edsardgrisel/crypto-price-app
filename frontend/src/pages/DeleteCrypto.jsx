@@ -48,7 +48,7 @@ const DeleteCrypto = () => {
     return (
         <div className='p-4'>
             <BackButton />
-            <h1 className='text-3x1 my-4'>Edit Crypto</h1>
+            <h1 className='text-3x1 my-4'>Delete crypto</h1>
             {loading ? <Spinner /> : ''}
             <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
                 <button className='p-2 bg-sky-300 m-8' onClick={handleDeleteCrypto}>Delete {name + " " + ticker}</button>
