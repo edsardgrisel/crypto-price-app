@@ -3,7 +3,6 @@ import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
 import cryptosRoute from "./routes/cryptosRoute.js"
 import cors from 'cors';
-import apiRoutes from "./routes/api.js"
 import { cmcListingLatestURL } from "./config.js";
 
 
