@@ -16,7 +16,12 @@ const CryptoSchema = mongoose.Schema(
             type: Number,
             required: false,
             unique: false,
-            default: -1,
+            default: null,
+        },
+        quantity: {
+            type: Number,
+            required: true,
+            default: 0,
         }
 
     },

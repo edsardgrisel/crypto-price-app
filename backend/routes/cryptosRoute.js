@@ -8,36 +8,53 @@ const router = express.Router()
 
 
 // Functionality for live price data --------------------------------
-const fetchLivePriceData = async () => {
-    try {
-        const response = await axios.get(cmcListingLatestURL, {
-            headers: {
-                cmcKEY: cmcKEYVALUE,
-            },
-        });
-        return response.data.data.map((crypto) => ({
-            name: crypto.name,
-            ticker: crypto.symbol,
-            price: crypto.quote.USD.price,
-        }));
-    } catch (error) {
-        console.error('Error fetching live price data:', error);
-        throw error;
-    }
-};
+// const fetchLivePriceData = async () => {
+//     try {
+//         const response = await axios.get(cmcListingLatestURL, {
+//             headers: {
+//                 "X-CMC_PRO_API_KEY": cmcKEYVALUE,
+//             },
+//         });
+//         return response.data.data.map((crypto) => ({
+//             name: crypto.name,
+//             ticker: crypto.symbol,
+//             price: crypto.quote.USD.price,
+//         }));
+//     } catch (error) {
+//         console.error('Error fetching live price data:', error);
+//         throw error;
+//     }
+// };
 
 router.put('/update-prices', async (req, res) => {
+
     try {
         // Fetch live price data
-        const livePriceData = await fetchLivePriceData().map((crypto) => ({
+        const liveData = await axios.get(cmcListingLatestURL, {
+            headers: {
+                "X-CMC_PRO_API_KEY": cmcKEYVALUE,
+            },
+        })
+
+        //Fetch tickers from database
+        const cryptos = await Crypto.find({})
+        const tickersInDatabase = cryptos.map((crypto) => crypto.ticker);
+
+
+
+        const livePriceData = liveData.data.data.map((crypto) => ({
             name: crypto.name,
             ticker: crypto.symbol,
-            price: crypto.quote.USD.price,
-        }));;
+            price: crypto.quote.USD.price < 1 ? crypto.quote.USD.price.toFixed(4) : crypto.quote.USD.price.toFixed(2),
+        }));
+        const filteredData = livePriceData.filter((crypto) => tickersInDatabase.includes(crypto.ticker));
+
 
         for (const crypto of livePriceData) {
             await Crypto.findOneAndUpdate({ ticker: crypto.ticker }, { price: crypto.price });
         }
+        // console.log(filteredData);
+
 
         res.json({ message: 'Crypto prices updated successfully' });
     } catch (error) {
@@ -58,6 +75,7 @@ router.post('/', async (request, response) => {
         const newCrypto = {
             name: request.body.name,
             ticker: request.body.ticker,
+            quantity: request.body.quantity,
         };
 
         const crypto = await Crypto.create(newCrypto)

@@ -5,6 +5,7 @@ import EditCrypto from './pages/EditCrypto';
 import DeleteCrypto from './pages/DeleteCrypto';
 import Home from './pages/Home';
 import ShowCrypto from './pages/ShowCrypto';
+import RefreshPrices from './pages/RefreshPrices';
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
         <Route path='/cryptos/details/:id' element={<ShowCrypto />} />
         <Route path='/cryptos/edit/:id' element={<EditCrypto />} />
         <Route path='/cryptos/delete/:id' element={<DeleteCrypto />} />
+        <Route path='/cryptos/update-prices' element={<RefreshPrices />} />
         <Route path='*' element={<Home />} />
       </Routes>
     </Router>

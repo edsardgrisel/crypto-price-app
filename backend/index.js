@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cryptosRoute from "./routes/cryptosRoute.js"
 import cors from 'cors';
 import apiRoutes from "./routes/api.js"
+import { cmcListingLatestURL } from "./config.js";
 
 
 const app = express();
@@ -13,7 +14,9 @@ const app = express();
 app.use(express.json());
 
 app.use(cors());
-//Middleware for handling CORS policy
+// Middleware for handling CORS policy
+// const urlList = ["http://localhost:3000", "http://localhost:5173/", "http://localhost:5555/", cmcListingLatestURL];
+// app.use(cors(urlList));
 // app.use(
 //     cors({
 //         origin: "http://localhost:3000",

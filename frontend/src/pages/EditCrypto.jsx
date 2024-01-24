@@ -8,6 +8,7 @@ const EditCrypto = () => {
 
     const [name, setName] = useState('');
     const [ticker, setTicker] = useState('');
+    const [quantity, setQuantity] = useState(0);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
@@ -32,6 +33,7 @@ const EditCrypto = () => {
         const data = {
             name,
             ticker,
+            quantity,
         };
         setLoading(true);
         axios
@@ -62,6 +64,10 @@ const EditCrypto = () => {
                 <div className='my-4'>
                     <label className='text-x1 mr-4 text-gray-500'>Ticker</label>
                     <input type="text" value={ticker} onChange={(e) => setTicker(e.target.value)} className='border-2 border-gray-500 px-4 py-2 w-full' />
+                </div>
+                <div className='my-4'>
+                    <label className='text-x1 mr-4 text-gray-500'>Quantity</label>
+                    <input type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} className='border-2 border-gray-500 px-4 py-2 w-full' />
                 </div>
                 <button className='p-2 bg-sky-300 m-8' onClick={handleEditCrypto}>Add</button>
             </div>
